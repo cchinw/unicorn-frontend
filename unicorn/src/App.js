@@ -12,6 +12,7 @@ import ResourcePage from './pages/ResourcePage'
 import UnicornProfile from './pages/UnicornProfile'
 import CommunityPage from './pages/CommunityPage'
 import DiscussionPage from './pages/DiscussionPage'
+import GriefStagePage from './pages/GriefStagePage'
 import Modal from './components/Modal'
 import Nav from './components/Nav'
 
@@ -19,6 +20,7 @@ function App() {
   // User State
   const [authenticated, toggleAuthenticated] = useState(false)
   const [unicornUser, setUnicornUser] = useState(null)
+  const [unicornUsers, setUnicornUsers] = useState([])
   const [nonUserUnicorn, setNonUserUnicorn] = useState({
     username: '',
     bio: '',
@@ -31,7 +33,7 @@ function App() {
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
 
   //Grief Stage State
-  const [griefStage, setGriefState] = useState('')
+  const [griefStage, setGriefStage] = useState('')
   const [griefStages, setGriefStages] = useState([])
 
   //Community State
@@ -97,10 +99,63 @@ function App() {
               />
             }
           />
-          <Route />
-          <Route />
-          <Route />
-          <Route />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/home"
+            element={
+              <Home
+                setGriefStages={setGriefStages}
+                griefStages={griefStages}
+                unicornUser={unicornUser}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                errorMessage={errorMessage}
+                setHeader={setHeader}
+                setErrorMessage={setErrorMessage}
+              />
+            }
+          />
+          <Route
+            path="/griefstage/:griefStageId"
+            element={
+              <GriefStagePage
+                griefStage={griefStage}
+                setGriefStage={setGriefStage}
+                communities={communities}
+                setCommunities={setCommunities}
+                unicornUser={unicornUser}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                setHeader={setHeader}
+                setErrorMessage={setErrorMessage}
+              />
+            }
+          />
+          <Route
+            path="/communitypage/communityId"
+            element={
+              <CommunityPage
+                community={community}
+                setCommunity={setCommunity}
+                unicornUser={unicornUser}
+                setUnicornUser={setUnicornUser}
+                unicornUsers={unicornUsers}
+                setUnicornUsers={setUnicornUsers}
+                griefStage={griefStage}
+                setGriefStage={setGriefStage}
+                discussion={discussion}
+                setDiscussion={setDiscussion}
+                comments={comments}
+                setComments={setComments}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                header={header}
+                setHeader={setHeader}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+              />
+            }
+          />
           <Route />
           <Route />
           <Route />
