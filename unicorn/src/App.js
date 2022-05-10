@@ -15,6 +15,7 @@ import DiscussionPage from './pages/DiscussionPage'
 import GriefStagePage from './pages/GriefStagePage'
 import Modal from './components/Modal'
 import Nav from './components/Nav'
+import Profile from './components/Profile'
 
 function App() {
   // User State
@@ -49,6 +50,9 @@ function App() {
   const [openModal, setOpenModal] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [header, setHeader] = useState('')
+
+  // Direct Message State
+  const [directMessages, setDirectMessages] = useState([])
 
   //Functions to control State
 
@@ -156,10 +160,37 @@ function App() {
               />
             }
           />
-          <Route />
-          <Route />
-          <Route />
-          <Route />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                unicornUser={unicornUser}
+                setUnicornUser={setUnicornUser}
+                community={community}
+                setCommunity={setCommunity}
+                griefStage={griefStage}
+                setGriefStage={setGriefStage}
+                directMessages={directMessages}
+                setDirectMessages={setDirectMessages}
+              />
+            }
+          />
+          <Route
+            path="/profile/:unicornUserId"
+            element={
+              <Profile
+                unicornUser={unicornUser}
+                nonUserUnicorn={nonUserUnicorn}
+                setNonUserUnicorn={setNonUserUnicorn}
+                community={community}
+                setCommunity={setCommunity}
+                griefStage={griefStage}
+                setGriefStage={setGriefStage}
+                directMessages={directMessages}
+                setDirectMessages={setDirectMessages}
+              />
+            }
+          />
         </Routes>
       </main>
     </div>
