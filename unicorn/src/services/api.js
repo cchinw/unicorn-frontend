@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 //Universal API call for the entire Auth on the app
-let apiUrl = 'https://localhost:8000/unicorn/api'
+let apiUrl = 'http://localhost:8000/unicorn/api'
 
 const Client = Axios.create({ baseURL: apiUrl })
 
@@ -10,7 +10,7 @@ Client.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
     if (token) {
-      config.headers['authorization'] = `Bearer ${token}`
+      config.headers['authorization'] = `Token ${token}`
     }
     return config
   },

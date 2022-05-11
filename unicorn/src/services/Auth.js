@@ -8,3 +8,13 @@ export const CheckSession = async () => {
     throw error
   }
 }
+
+// Axios call to create a new user
+export const RegisterUnicornUser = async (data) => {
+  try {
+    const res = await Client.post('/auth/register', data)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

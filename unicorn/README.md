@@ -28,8 +28,11 @@ The App is created using:
 
 1. Django Views
 2. Python
-3. React
-4. CSS Flexbox/Grid
-5. External API
+3. PostgreSQL
+4. Express
+5. Node.JS
+6. React
+7. CSS Flexbox/Grid
+8. External API
 
 ### References

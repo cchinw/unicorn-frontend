@@ -1,4 +1,5 @@
 import './style/App.css'
+import './style/Nav.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import axios from 'axios'
@@ -27,6 +28,8 @@ function App() {
     bio: '',
     communityId: null
   })
+  const [usernames, setUsernames] = useState([])
+  const [emails, setEmails] = useState([])
 
   // Password State
   const [passwordUpdate, setPasswordUpdate] = useState(null)
@@ -69,6 +72,14 @@ function App() {
     toggleAuthenticated(true)
   }
 
+  // Verify token
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkToken()
+    }
+  }, [])
+
   return (
     <div className="App">
       {openModal && (
@@ -103,7 +114,23 @@ function App() {
               />
             }
           />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/register"
+            element={
+              <Register
+                usernames={usernames}
+                setUsernames={setUsernames}
+                emails={emails}
+                setEmails={setEmails}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                errorMessage={errorMessage}
+                header={header}
+                setHeader={setHeader}
+                setErrorMessage={setErrorMessage}
+              />
+            }
+          />
           <Route
             path="/home"
             element={
@@ -114,6 +141,7 @@ function App() {
                 openModal={openModal}
                 setOpenModal={setOpenModal}
                 errorMessage={errorMessage}
+                header={header}
                 setHeader={setHeader}
                 setErrorMessage={setErrorMessage}
               />
@@ -128,6 +156,7 @@ function App() {
                 communities={communities}
                 setCommunities={setCommunities}
                 unicornUser={unicornUser}
+                setUnicornUser={setUnicornUser}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
                 setHeader={setHeader}
@@ -157,6 +186,8 @@ function App() {
                 setHeader={setHeader}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
+                upvote={upvote}
+                setUpvote={setUpvote}
               />
             }
           />
