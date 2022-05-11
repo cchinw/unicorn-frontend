@@ -17,6 +17,10 @@ const Nav = ({authenticated, unicornUser, handleLogout}) => {
               <li className="i fa fa-home"><Link to='/home'>Home</Link></li>
             </div>
 
+            <div className="icon icon-fill">
+              <li className="i fa fa-home"><Link to='/about'>About Unicorn</Link></li>
+            </div>
+
             <div className="icon icon-enter">
               <li className="fa fa-user"><Link to="/profile">My Profile</Link></li>
             </div>
@@ -52,6 +56,10 @@ const Nav = ({authenticated, unicornUser, handleLogout}) => {
                <li className="i fa fa-home"><Link to='/home'>Home</Link></li>
              </div>
 
+             <div className="icon icon-fill">
+              <li className="i fa fa-home"><Link to='/about'>About Unicorn</Link></li>
+            </div>
+
              <div className="icon icon-enter">
              <li className="fa fa-user"><Link to="/profile">My Profile</Link></li>
            </div>
@@ -80,7 +88,8 @@ const Nav = ({authenticated, unicornUser, handleLogout}) => {
 
   const publicOptions = (
     <nav className="publicOption nav-body">
-      <Link to="/">Home</Link>
+      <Link to="/landing-page">Home</Link>
+      <Link to="/about">About Unicorn</Link>
       <Link to="/register">Register</Link>
       <Link to="/login">Sign In</Link>
     </nav>

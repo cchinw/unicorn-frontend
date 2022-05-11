@@ -6,7 +6,7 @@ const About = () => {
         "...but what is grief, if not love persevering?" - Vision(WandaVision,
         2021)
       </h4>
-      <div class="faq-pretext">
+      <div className="faq-pretext">
         <p>
           I know what it feels to lose someone so close to you. Like all of you
           here, I lost my friend, Titi in November of 2020. She was my first
@@ -43,13 +43,13 @@ const About = () => {
           what you are going through, can relate to your pain, and can feel your
           loss with you, makes all of the difference. That was so important for
           me to have, and so I decided to pour out my heart and create
-          <span className="unicorn-tag-about">Unicorn</span>. I want to give the
-          gift of community to people who are going through or have gone through
-          what I went through. I want to create a space for people to have what
-          my sisters were to me, in the darkest times of my life. I am holding
-          your hands through this process. Please don't shut down. Heal. My hope
-          is that in using Unicorn, you help others heal and in doing so, you
-          heal yourself too. I love you all.{' '}
+          <span className="unicorn-tag-about"> Unicorn</span>. I want to give
+          the gift of community to people who are going through or have gone
+          through what I went through. I want to create a space for people to
+          have what my sisters were to me, in the darkest times of my life. I am
+          holding your hands through this process. Please don't shut down. Heal.
+          My hope is that in using Unicorn, you help others heal and in doing
+          so, you heal yourself too. I love you all.{' '}
         </p>
 
         <p>Love, Wendy</p>

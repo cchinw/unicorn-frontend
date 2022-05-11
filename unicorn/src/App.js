@@ -66,19 +66,19 @@ function App() {
   }
 
   // Check each time if the user is a pilgrim and authenticated to make certain commands
-  const checkToken = async () => {
-    const unicornUser = await CheckSession()
-    setUnicornUser(unicornUser)
-    toggleAuthenticated(true)
-  }
+  // const checkToken = async () => {
+  //   const unicornUser = await CheckSession()
+  //   setUnicornUser(unicornUser)
+  //   toggleAuthenticated(true)
+  // }
 
   // Verify token
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      checkToken()
-    }
-  }, [])
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token')
+  //   if (token) {
+  //     checkToken()
+  //   }
+  // }, [])
 
   return (
     <div className="App">
@@ -147,6 +147,7 @@ function App() {
               />
             }
           />
+          <Route path="/about" element={<About />} />
           <Route
             path="/griefstage/:griefStageId"
             element={
