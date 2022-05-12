@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import UnicornMainLogo from '../assets/UnicornMainLogo.png'
-import UnicornMainLogo2 from '../assets/UnicornMainLogo2.png'
+import UnicornMainLogo from '../assets/UnicornMainLogo2.png'
 import stars1 from '../assets/stars1.png'
 import stars2 from '../assets/stars2.png'
 import stars3 from '../assets/stars3.png'

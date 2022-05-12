@@ -36,25 +36,23 @@ const Home = ({
       </div>
       <div className="stages-of-grief">
         <div className="stage-of-grief">
-          {griefStages.map((stage) => (
-            <div>
-              <GriefStage
-                key={stage.id}
-                className="grief-stage"
-                griefStage={stage.id}
-                title={stage.title}
-                description={stage.description}
-                image={stage.image}
-                unicornUser={unicornUser}
-                setUnicornUser={setUnicornUser}
-                errorMessage={errorMessage}
-                setErrorMessage={setErrorMessage}
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-                header={header}
-                setHeader={setHeader}
-              />
-            </div>
+          {griefStages.map((stage, index) => (
+            <GriefStage
+              key={index}
+              className="grief-stage"
+              griefStage={stage.id}
+              title={stage.title}
+              description={stage.description}
+              image={stage.image}
+              unicornUser={unicornUser}
+              setUnicornUser={setUnicornUser}
+              errorMessage={errorMessage}
+              setErrorMessage={setErrorMessage}
+              openModal={openModal}
+              setOpenModal={setOpenModal}
+              header={header}
+              setHeader={setHeader}
+            />
           ))}
           <img
             className="griever"
@@ -67,7 +65,8 @@ const Home = ({
               zIndex: `12`,
               height: '100px',
               width: '100px',
-              animation: 'float 5s ease 2s infinite'
+              animation: 'float 5s ease 2s infinite',
+              borderRadius: `50%`
             }}
           />
         </div>

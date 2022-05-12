@@ -64,6 +64,9 @@ function App() {
   // Direct Message State
   const [directMessages, setDirectMessages] = useState([])
 
+  // Resources State
+  const [resources, setResources] = useState([])
+
   //Functions to control State
 
   const handleLogout = () => {
@@ -176,6 +179,8 @@ function App() {
                 setHeader={setHeader}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
+                resources={resources}
+                setResources={setResources}
               />
             }
           />
