@@ -1,0 +1,26 @@
+.grief-stage-page {
+  background-color: #1D2A3A;
+  min-height: 100vh;
+  overflow-y: hidden;
+}
+.grief-stage-name {
+  font-size: 4em;
+  margin: 5vh 0 0 0;
+}
+.grief-stage-image {
+  height: 50vh;
+  animation: float 5s ease 2s infinite ;
+}
+.grief-stage-desc-header {
+  margin: 0 0 5vh 0;
+}
+.resources-carousel {
+  display: flex;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  width: 70vw;
+  height: 30vw;
+  border-radius: 10px;
+  border: 1px solid white;
+  margin: 0 0 5vh 0;
+}

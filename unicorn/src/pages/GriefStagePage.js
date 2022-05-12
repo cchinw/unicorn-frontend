@@ -35,7 +35,7 @@ const GriefStagePage = ({
 
   return (
     <div className="grief-stage-page">
-      <div className="grief-stage-page">
+      <div className="grief-stage-container">
         <h1 className="grief-stage-name">{griefStage.title}</h1>
         <img
           className="grief-stage-image"
@@ -46,9 +46,9 @@ const GriefStagePage = ({
           <h3 className="grief-stage-header">
             What is {griefStage.title} and how do i know that I am here?
           </h3>
-        </div>
-        <div className="grief-stage-desc">
-          <p>{griefStage.description}</p>
+          <div className="grief-stage-desc">
+            <p>{griefStage.description}</p>
+          </div>
         </div>
         <div className="resources-carousel">
           {resources.map((resource) => (
