@@ -1,5 +1,8 @@
 import './style/App.css'
 import './style/Nav.css'
+import './style/About.css'
+import './style/Landing.css'
+import './style/Modal.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import axios from 'axios'
@@ -54,6 +57,10 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('')
   const [header, setHeader] = useState('')
 
+  // Landing Page State
+  const [isHovering, setIsHovering] = useState(false)
+  const [image, setImage] = useState(null)
+
   // Direct Message State
   const [directMessages, setDirectMessages] = useState([])
 
@@ -97,11 +104,15 @@ function App() {
       <main>
         <Routes>
           <Route
-            path="/"
+            path="/landing-page"
             element={
               <Landing
                 setUnicornUser={setUnicornUser}
                 toggleAuthenticated={toggleAuthenticated}
+                isHovering={isHovering}
+                setIsHovering={setIsHovering}
+                image={image}
+                setImage={setImage}
               />
             }
           />
@@ -160,7 +171,9 @@ function App() {
                 setUnicornUser={setUnicornUser}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
+                header={header}
                 setHeader={setHeader}
+                errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
               />
             }

@@ -1,24 +1,26 @@
+import Titi from '../assets/Tilly-Tilly.jpeg'
 const About = () => {
   return (
-    <div className="faqtext">
-      <h1 className="faqheader">About Unicorn</h1>
-      <h4>
+    <div className="abouttext">
+      <h1 className="aboutheader">About Unicorn</h1>
+      <h4 className="vision-quote">
         "...but what is grief, if not love persevering?" - Vision(WandaVision,
         2021)
       </h4>
-      <div className="faq-pretext">
+      <img className="tilly-tilly" src={Titi} alt="Unicorn-Princess" />
+      <div className="about-pretext">
         <p>
           I know what it feels to lose someone so close to you. Like all of you
           here, I lost my friend, Titi in November of 2020. She was my first
-          best friend and really my soul sister for the 11 years that we were
-          blessed to be a part of each other's lives. Everyone remembers the
-          exact moment they found out their loved one was gone, and then what
-          follow is an absolute blur. A darkness that is indescribable and a
-          feeling of hollow, aloneness, numbness, pain, rage, sadness. A
-          cocktail of emotions if you may, but one thing is for certain, in that
-          exact moment, we became changed forever. Like a part of yourself, and
-          your innocence, and your joy, has forever been dented by this one
-          particular incident.
+          best friend, my unicorn princess and really my soul sister for the 11
+          years that we were blessed to be a part of each other's lives.
+          Everyone remembers the exact moment they found out their loved one was
+          gone, and then what follow is an absolute blur. A darkness that is
+          indescribable and a feeling of hollow, aloneness, numbness, pain,
+          rage, sadness. A cocktail of emotions if you may, but one thing is for
+          certain, in that exact moment, we became changed forever. Like a part
+          of yourself, and your innocence, and your joy, has forever been dented
+          by this one particular incident.
         </p>
 
         <p>
@@ -54,11 +56,18 @@ const About = () => {
 
         <p>Love, Wendy</p>
       </div>
-      <p>
-        This is a model of the community I built during my software engineering
-        immersive program at General assembly. Connect with me on
-        <a href="https://www.linkedin.com/in/chinwenduukoha/">Linkedin</a>!
-      </p>
+      <div className="linkedin">
+        <p>
+          This is a model of the community I built during my software
+          engineering immersive program at General assembly.
+        </p>
+        <p>
+          Connect with me on{' '}
+          <span>
+            <a href="https://www.linkedin.com/in/chinwenduukoha/">Linkedin!</a>
+          </span>
+        </p>
+      </div>
     </div>
   )
 }

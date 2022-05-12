@@ -12,7 +12,9 @@ const GriefStagePage = ({
   setUnicornUser,
   openModal,
   setOpenModal,
+  header,
   setHeader,
+  errorMessage,
   setErrorMessage
 }) => {
   const [changingTitle, toggleChangingTitle] = useState(false)

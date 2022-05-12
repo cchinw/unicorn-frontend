@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import Logo from '../assets/Tilly-Tilly.jpeg'
+import Logo from '../assets/UnicornMainLogo.png'
 
 const Nav = ({authenticated, unicornUser, handleLogout}) => {
   let authenticatedOptions
   if(unicornUser) {
     authenticatedOptions= (
-    <nav className="navbar-text nav-body nav">
+    <nav className="navbar-text nav-body">
       <div className="welcome">
           <h1 className="username">Welcome {unicornUser.username}!</h1>
           <ul className="icon icon-container">

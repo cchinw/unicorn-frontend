@@ -1,0 +1,132 @@
+.landing {
+  background-color: linear-gradient(45deg, #FFCBF2, #F3C4FB, #ECBCFD, #E5B3FE, #E2AFFF, #DEAAFF, #D8BBFF, #D0D1FF, #C8E7FF, #C0FDFF);
+  height: 100vh;
+  color: linear-gradient(45deg, #D8BBFF, #D0D1FF, #C8E7FF, #C0FDFF);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.landing:before {
+  content: '';
+  background: linear-gradient(45deg, #FFCBF2, #F3C4FB, #ECBCFD, #E5B3FE, #E2AFFF, #DEAAFF, #D8BBFF, #D0D1FF, #C8E7FF, #C0FDFF);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.landing:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #FFCBF2, #F3C4FB, #ECBCFD, #E5B3FE, #E2AFFF, #DEAAFF, #D8BBFF, #D0D1FF, #C8E7FF, #C0FDFF);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+.landing:active {
+  color: #000
+}
+
+.landing body {
+overflow-x: hidden;
+background-color: #1D2A3A;
+min-height: 100vh;
+overflow-y: hidden;
+}
+
+body {
+  overflow-y: hidden;
+  font-family: 'Itim', cursive;
+}
+
+.landing h3 h1 {
+  margin: 3vh;
+  max-width: 60vw;
+}
+
+.landing h1{
+  font-family: 'Itim', 'Meddon', cursive;
+}
+
+.landing-text{
+  margin-top: 30px;
+  color: #C0FDFF
+}
+
+.unicorn-logo-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-landing {
+  margin-top: -0px;
+}
+
+.stars-orbit {
+  position: absolute;
+  height: 60vh;
+  width: 60vh;
+  border-radius: 50%;
+  z-index: 2;
+  animation: App-logo-spin infinite 30s linear
+}
+
+.unicorn-stars1 {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+}
+
+.unicorn-stars2 {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+}
+
+.unicorn-stars3 {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+}
+
+.unicorn-logo-switch{
+  margin-top: -20px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+
+@media (max-width: 10000px) {
+  .stars-orbit{
+    height: fit-content;
+    width: fit-content;
+  }
+  .logo-landing{
+    height: 50px;
+    width: 50px;
+  }
+  body{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    max-width: max-content;
+    max-height: 100vh;
+  }
+}
