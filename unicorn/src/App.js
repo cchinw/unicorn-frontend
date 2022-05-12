@@ -143,18 +143,19 @@ function App() {
             }
           />
           <Route
-            path="/home"
+            path="/"
             element={
               <Home
                 setGriefStages={setGriefStages}
                 griefStages={griefStages}
                 unicornUser={unicornUser}
+                setUnicornUser={setUnicornUser}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
                 errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
                 header={header}
                 setHeader={setHeader}
-                setErrorMessage={setErrorMessage}
               />
             }
           />

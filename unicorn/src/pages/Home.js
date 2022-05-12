@@ -1,11 +1,14 @@
 import GriefStage from '../components/GriefStage'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Client from '../services/api'
+import Griever from '../assets/UnicornMainLogo.png'
 
 const Home = ({
-  setGriefStage,
+  setGriefStages,
   griefStages,
   unicornUser,
+  setUnicornUser,
   openModal,
   setOpenModal,
   errorMessage,
@@ -13,13 +16,15 @@ const Home = ({
   setHeader,
   setErrorMessage
 }) => {
-  const getGriefStage = async () => {
+  let navigate = useNavigate()
+
+  const getGriefStages = async () => {
     const res = await Client.get(`/list/grief-stages`)
-    setGriefStage(res.data)
+    setGriefStages(res.data)
   }
 
   useEffect(() => {
-    getGriefStage()
+    getGriefStages()
   }, [])
 
   return (
@@ -31,13 +36,17 @@ const Home = ({
       </div>
       <div className="stages-of-grief">
         <div className="stage-of-grief">
-          {griefStages.map((stage, idx) => (
+          {griefStages.map((stage) => (
             <div>
               <GriefStage
-                key={idx}
+                key={stage.id}
                 className="grief-stage"
                 griefStage={stage.id}
+                title={stage.title}
+                description={stage.description}
+                image={stage.image}
                 unicornUser={unicornUser}
+                setUnicornUser={setUnicornUser}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
                 openModal={openModal}
@@ -45,10 +54,22 @@ const Home = ({
                 header={header}
                 setHeader={setHeader}
               />
-              <img className="home-image" src={stage.image} />
-              <p className="home-desc">{stage.description}</p>
             </div>
           ))}
+          <img
+            className="griever"
+            src={Griever}
+            alt="Unicorn in grief"
+            onClick={() => {
+              navigate(`/profile`)
+            }}
+            style={{
+              zIndex: `12`,
+              height: '100px',
+              width: '100px',
+              animation: 'float 5s ease 2s infinite'
+            }}
+          />
         </div>
       </div>
     </div>
