@@ -54,8 +54,18 @@ const GriefStagePage = ({
           {resources.map((resource) => (
             <Resource
               key={resource.id}
+              title={resource.resource_title}
               resource={resource.resource}
               griefStage={resource.grief_stage}
+              image={resource.image}
+              unicornUser={unicornUser}
+              setUnicornUser={setUnicornUser}
+              openModal={openModal}
+              setOpenModal={setOpenModal}
+              errorMessage={errorMessage}
+              setErrorMessage={setErrorMessage}
+              header={header}
+              setHeader={setHeader}
             />
           ))}
         </div>
@@ -64,6 +74,8 @@ const GriefStagePage = ({
           <Community
             communities={communities}
             setCommunities={setCommunities}
+            griefStage={griefStage}
+            setGriefStage={setGriefStage}
             griefStageId={griefStageId}
             unicornUser={unicornUser}
             setUnicornUser={setUnicornUser}

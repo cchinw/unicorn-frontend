@@ -5,14 +5,6 @@ import stars2 from '../assets/stars2.png'
 import stars3 from '../assets/stars3.png'
 
 const Landing = ({ isHovering, setIsHovering, image, setImage }) => {
-  const handleMouseEnter = () => {
-    setIsHovering(true)
-  }
-
-  const handleMouseLeave = () => {
-    setIsHovering(false)
-  }
-
   return (
     <div className="landing">
       <div className="landing-text">
@@ -31,7 +23,7 @@ const Landing = ({ isHovering, setIsHovering, image, setImage }) => {
             zIndex: `12`,
             height: '50vh',
             width: '50vh',
-            animation: `Reverse-logo-spin infinite 30s linear`,
+            animation: `float 5s ease 2s infinite`,
             borderRadius: `50%`
           }}
         />

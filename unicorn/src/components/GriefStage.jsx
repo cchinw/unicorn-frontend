@@ -9,6 +9,8 @@ const GriefStage = ({griefStage, title, description, image, unicornUser, setUnic
       navigate(`/detail/grief-stage/${id}`)
     }
   }
+
+
   
   return(
   <div className="grief-stage">
@@ -16,13 +18,9 @@ const GriefStage = ({griefStage, title, description, image, unicornUser, setUnic
       <Link to={`griefstage/${griefStage}`}>
         <div className='grief-stage-card'>
           <img className='grief-image' src={image}/>
-          <div className='card-info'>
-            <div className='card-btn'>
-              <button className='grief-stage-btn'>{title}</button>
-            </div>
-          </div>
         </div>
       </Link>
+      <h4>{title}</h4>
     </div>
   </div>
   )

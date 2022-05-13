@@ -3,17 +3,17 @@ import './style/Nav.css'
 import './style/About.css'
 import './style/Landing.css'
 import './style/Modal.css'
+import './style/Home.css'
 import './style/GriefStagePage.css'
+import './style/SignUp.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import axios from 'axios'
 import { CheckSession } from './services/Auth'
 import About from './pages/About'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Landing from './pages/Landing'
-import ResourcePage from './pages/ResourcePage'
 import UnicornProfile from './pages/UnicornProfile'
 import CommunityPage from './pages/CommunityPage'
 import DiscussionPage from './pages/DiscussionPage'
@@ -21,6 +21,7 @@ import GriefStagePage from './pages/GriefStagePage'
 import Modal from './components/Modal'
 import Nav from './components/Nav'
 import Profile from './components/Profile'
+import Resource from './components/Resource'
 
 function App() {
   // User State
@@ -47,6 +48,21 @@ function App() {
   //Community State
   const [communities, setCommunities] = useState([])
   const [community, setCommunity] = useState('')
+  const [clicked, toggleClicked] = useState(false)
+  const [clickedComment, toggleClickedComment] = useState(false)
+  const [deleted, toggleDeleted] = useState(false)
+  const [userImages, setUserImages] = useState([])
+  const [editingName, toggleEditingName] = useState(false)
+  const [newName, setNewName] = useState('')
+  const [editingImage, toggleEditingImage] = useState(false)
+  const [newImage, setNewImage] = useState('')
+  const [creator, setCreator] = useState({})
+  const [editingColors, toggleEditingColors] = useState(false)
+  const [newPrimaryColor, setNewPrimaryColor] = useState('')
+  const [newSecondaryColor, setNewSecondaryColor] = useState('')
+  const [loaded, toggleLoaded] = useState(false)
+  const [reload, toggleReload] = useState(false)
+  const [reloads, setReloads] = useState(0)
 
   // Discussion Page State
   const [discussion, setDiscussion] = useState([])
@@ -186,7 +202,7 @@ function App() {
             }
           />
           <Route
-            path="/communitypage/communityId"
+            path="/communitypage/:id"
             element={
               <CommunityPage
                 community={community}
@@ -209,6 +225,36 @@ function App() {
                 setErrorMessage={setErrorMessage}
                 upvote={upvote}
                 setUpvote={setUpvote}
+                clicked={clicked}
+                toggleClicked={toggleClicked}
+                clickedComment={clickedComment}
+                toggleClickedComment={toggleClickedComment}
+                deleted={deleted}
+                toggleDeleted={toggleDeleted}
+                userImages={userImages}
+                setUserImages={setUserImages}
+                editingName={editingName}
+                toggleEditingName={toggleEditingName}
+                newName={newName}
+                setNewName={setNewName}
+                editingImage={editingImage}
+                toggleEditingImage={toggleEditingImage}
+                newImage={newImage}
+                setNewImage={setNewImage}
+                creator={creator}
+                setCreator={setCreator}
+                editingColors={editingColors}
+                toggleEditingColors={toggleEditingColors}
+                newPrimaryColor={newPrimaryColor}
+                newSecondaryColor={newSecondaryColor}
+                setNewPrimaryColor={setNewPrimaryColor}
+                setNewSecondaryColor={setNewSecondaryColor}
+                loaded={loaded}
+                toggleLoaded={toggleLoaded}
+                reload={reload}
+                toggleReload={toggleReload}
+                reloads={reloads}
+                setReloads={setReloads}
               />
             }
           />
@@ -230,7 +276,7 @@ function App() {
           <Route
             path="/profile/:unicornUserId"
             element={
-              <Profile
+              <UnicornProfile
                 unicornUser={unicornUser}
                 nonUserUnicorn={nonUserUnicorn}
                 setNonUserUnicorn={setNonUserUnicorn}
@@ -243,6 +289,20 @@ function App() {
               />
             }
           />
+          {/* <Route
+            path="/resources"
+            element={
+              <Resource
+                unicornUser={unicornUser}
+                nonUserUnicorn={nonUserUnicorn}
+                setNonUserUnicorn={setNonUserUnicorn}
+                community={community}
+                setCommunity={setCommunity}
+                griefStage={griefStage}
+                setGriefStage={setGriefStage}
+              />
+            }
+          /> */}
         </Routes>
       </main>
     </div>
