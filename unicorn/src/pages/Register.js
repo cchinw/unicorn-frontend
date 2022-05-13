@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { RegisterUnicornUser } from '../services/Auth'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import Client from '../services/api'
 
 const Register = ({
   usernames,
@@ -26,11 +26,8 @@ const Register = ({
     confirmPassword: ''
   })
 
-  // Universal Axios call
-  let apiUrl = 'http://localhost:8000/unicorn/api'
-
   const getAllUsers = async () => {
-    const response = await axios.get(`${apiUrl}/unicorn`)
+    const response = Client.get(`/register/user`)
     let loadUsernames = []
     let loadEmails = []
 
@@ -54,19 +51,19 @@ const Register = ({
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (usernames.indexOf(formValues.username) !== -1) {
-      return window.alert('Account with that username already exists')
+      setOpenModal(true)
+      setHeader('Please Try another Username')
+      setErrorMessage('Account with that username already exists')
     }
     if (emails.indexOf(formValues.email) !== -1) {
-      return window.alert('Account with that email already exists')
-    }
-    if (formValues.avatar === '') {
-      formValues.avatar = ''
-    }
-    if (formValues.avatar.slice(0, 4) !== 'http') {
-      return window.alert('Please choose a different avatar')
+      setOpenModal(true)
+      setHeader('Please Try another Email')
+      setErrorMessage('Account with that email already exists')
     }
     if (formValues.password !== formValues.confirmPassword) {
-      return window.alert('Passwords must match')
+      setOpenModal(true)
+      setHeader('Your passwords do not match!')
+      setErrorMessage('Please confirm passwords and try again')
     }
     await RegisterUnicornUser({
       username: formValues.username,
@@ -102,25 +99,6 @@ const Register = ({
             />
           </div>
           <div className="input-wrapper">
-            <input
-              onChange={handleChange}
-              name="name"
-              type="text"
-              placeholder="Full Name"
-              value={formValues.name}
-              required
-            />
-          </div>
-          <div className="unicorn-user-avatar">
-            <input
-              onChange={handleChange}
-              placeholder="Profile avatar"
-              name="avatar"
-              type="text"
-              value={formValues.avatar}
-            />
-          </div>
-          <div className="input-wrapper">
             <textarea
               className="register-bio"
               rows="10"
@@ -129,6 +107,15 @@ const Register = ({
               type="text"
               placeholder="Enter a short bio here..."
               value={formValues.bio}
+            />
+          </div>
+          <div className="unicorn-user-avatar">
+            <input
+              onChange={handleChange}
+              placeholder="Profile avatar"
+              name="avatar"
+              type="file"
+              value={formValues.avatar}
             />
           </div>
           <div className="input-wrapper">

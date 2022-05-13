@@ -6,6 +6,7 @@ import './style/Modal.css'
 import './style/Home.css'
 import './style/GriefStagePage.css'
 import './style/SignUp.css'
+import './style/Button.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { CheckSession } from './services/Auth'
@@ -142,6 +143,16 @@ function App() {
               <Login
                 setUnicornUser={setUnicornUser}
                 toggleAuthenticated={toggleAuthenticated}
+                usernames={usernames}
+                setUsernames={setUsernames}
+                emails={emails}
+                setEmails={setEmails}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                header={header}
+                setHeader={setHeader}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
               />
             }
           />

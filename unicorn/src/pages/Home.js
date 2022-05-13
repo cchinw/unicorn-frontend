@@ -33,8 +33,8 @@ const Home = ({
         <h1>Welcome to Unicorn</h1>
         <h3>Where you do not have to deal with loss on your own</h3>
       </div>
+      <h3>Learn about the The 7 Stages of Grief</h3>
       <div className="stages-of-grief">
-        <h3>The 7 Stages of Grief</h3>
         {griefStages.map((stage, index) => (
           <GriefStage
             key={index}
@@ -55,6 +55,7 @@ const Home = ({
         ))}
       </div>
       <div>
+        <h3>We are all here because we have all lost someone</h3>
         <p>
           When you lose someone you love, it’s hard to imagine life without
           them. Every loss comes with pain and adjustments we need to make. You

@@ -43,7 +43,7 @@
 
 .landing body {
 overflow-x: hidden;
-background-color: #1D2A3A;
+/* background-color: #1D2A3A; */
 min-height: 100vh;
 overflow-y: hidden;
 }

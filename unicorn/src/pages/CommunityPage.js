@@ -100,14 +100,14 @@ const CommunityPage = (props) => {
   const joinCommunity = async () => {
     if (props.unicornUser.members === null) {
       let updatedUser = Client.put(
-        `/update/community/${props.unicornUser.id}`,
+        `/update/unicorn-user/${props.unicornUser.id}`,
         {
           community: props.community
         }
       )
       props.setUnicornUser({ ...props.unicornUser, community: props.community })
       let population = props.griefStage.population
-      Client.put(`/update/grief-stage/${props.griefStage.id}`, {
+      Client.put(`/update/grief-stage/${props.griefStage.members}`, {
         population: parseInt(population + 1)
       })
       props.setGriefStage({
@@ -232,7 +232,258 @@ const CommunityPage = (props) => {
       props.toggleClicked(!props.clicked)
     }
 
-    return <div className="community-page"></div>
+    // const checkPriviledge = async () => {
+    //   const response = Client.get(`list/users`)
+    //   if (res.data.user_type === 1) {
+
+    //   }
+    // }
+
+    return (
+      <div className="community-details">
+        <div className="first-col">
+          {!props.unicornUser ? (
+            <div>Loading</div>
+          ) : // if creator or admin
+          parseInt(props.community.creatorId) ===
+              parseInt(props.unicornUser.id) ||
+            props.unicornUser.user_type === 1 ? (
+            //if editing
+            props.editingName ? (
+              <div>
+                <input type="text" onChange={handleNameChange} required />
+                <div>
+                  <button
+                    className="btn"
+                    onClick={() => props.toggleEditingName(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button className="btn" onClick={handleNameSubmit}>
+                    Submit
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex' }}>
+                <h1>{props.community.category}</h1>
+                <button
+                  className="btn"
+                  onClick={() => props.toggleEditingName(true)}
+                >
+                  Edit
+                </button>
+              </div>
+            )
+          ) : (
+            // not creator
+            <h1>{props.community.name}</h1>
+          )}
+          {!props.unicornUser ? (
+            <div>Loading</div>
+          ) : parseInt(props.community.creator) ===
+              parseInt(props.unicornUser.id) ||
+            props.unicornUser.user_type === 1 ? (
+            props.editingImage ? (
+              <div>
+                <input type="text" onChange={handleImageChange} required />
+                <div>
+                  <button
+                    className="btn"
+                    onClick={() => toggleEditingImage(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button className="btn" onClick={handleImageSubmit}>
+                    Submit
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <img
+                  className="community-image"
+                  src={props.community.image}
+                  alt={props.community.category}
+                />
+                <button
+                  className="btn"
+                  onClick={() => props.toggleEditingImage(true)}
+                >
+                  Edit
+                </button>
+              </div>
+            )
+          ) : (
+            <img
+              className="community-image"
+              src={props.community.image}
+              alt={props.community.name}
+            />
+          )}
+          {props.unicornUser === null ? (
+            <div>Login to join</div>
+          ) : parseInt(props.unicornUser.community) === parseInt(id) ? (
+            <button onClick={() => leaveCommunity()}>Leave Community</button>
+          ) : (
+            <button onClick={() => joinCommunity()}>Join Community</button>
+          )}
+          {!props.unicornUser ? (
+            <div>Loading</div>
+          ) : parseInt(props.unicornUser.id) ===
+            parseInt(props.creator.creator) ? (
+            <h2>Creator: {props.creator.username}</h2>
+          ) : (
+            <h2>
+              Creator:{' '}
+              <Link to={`/profile/${props.creator.id}`}>
+                {props.creator.username}
+              </Link>
+            </h2>
+          )}
+          <h3>Members:</h3>
+          {props.unicornUsers.map((unicornUser) => (
+            <div key={unicornUser.id}>
+              {unicornUser.id === props.unicornUser.id ? (
+                <h3>{unicornUser.username}</h3>
+              ) : parseInt(props.community.creator) ===
+                  parseInt(props.unicornUser.id) ||
+                props.unicornUser.user_type === 1 ? (
+                <div style={{ display: 'flex' }}>
+                  <Link to={`/detail/unicorn-user/${unicornUser.id}`}>
+                    <h3>{unicornUser.username}</h3>
+                  </Link>
+                  <button
+                    className="btn"
+                    onClick={() => removeUser(unicornUser.id)}
+                    style={{ marginLeft: '1vh' }}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ) : (
+                <Link to={`/profile/${unicornUser.id}`}>
+                  <h3>{unicornUser.username}</h3>
+                </Link>
+              )}
+            </div>
+          ))}
+          {/* preventing negative population  */}
+          {props.community.population < 0 ? (
+            <h3 className="population">Population: 0</h3>
+          ) : (
+            <h3 className="population">
+              Population: {props.community.population}
+            </h3>
+          )}
+          {!props.unicornUser ? (
+            <div>Loading</div>
+          ) : parseInt(props.community.creatorId) ===
+              parseInt(props.unicornUser.id) ||
+            props.unicornUser.admin === true ? (
+            editingColors ? (
+              <div>
+                <div>
+                  <input
+                    type="color"
+                    onChange={handlePrimaryColorChange}
+                    required
+                    style={{ margin: '.5vh' }}
+                  />
+                  <input
+                    type="color"
+                    onChange={handleSecondaryColorChange}
+                    required
+                    style={{ margin: '.5vh' }}
+                  />
+                </div>
+                <div>
+                  <button
+                    className="btn"
+                    onClick={() => toggleEditingColors(false)}
+                    style={{ margin: '.5vh' }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="btn"
+                    style={{ margin: '.5vh' }}
+                    onClick={handleColorsSubmit}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button className="btn" onClick={() => toggleEditingColors(true)}>
+                Edit Colors
+              </button>
+            )
+          ) : (
+            <div></div>
+          )}
+        </div>
+
+        {/* Second div for comments */}
+
+        <div className="second-col comments">
+          {/* Comments Input Box */}
+
+          {props.unicornUser === null ? (
+            <div>Login to comment</div>
+          ) : (
+            <CreateComment
+              clickedComment={clickedComment}
+              toggleClickedComment={toggleClickedComment}
+              communityId={communityId}
+              unicornUser={props.unicornUser}
+            />
+          )}
+
+          {/* Render all comments on communiuty page */}
+          <div className="third-col comments-area">
+            {props.comments.map((comment, index) => (
+              <div className="singleComment" key={comment.id}>
+                <div className="comment-userName">
+                  {props.unicornUser.id === comment.unicornUserId ? (
+                    <div>{usernames[index]}</div>
+                  ) : (
+                    <Link to={`/profile/${comment.unicornUserId}`}>
+                      {usernames[index]}
+                    </Link>
+                  )}
+                </div>
+                <div className="image-comment">
+                  <img
+                    src={userImages[index]}
+                    alt="user-Image"
+                    className="user-image-comment"
+                  />
+                  <div className="comment-comment">{comment.comment}</div>
+                </div>
+                {comment.unicornUserId === props.unicornUser.id ? (
+                  <button
+                    className="comment-button btn"
+                    onClick={() => deleteComment(comment.id)}
+                  >
+                    Delete
+                  </button>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
   }
 }
 

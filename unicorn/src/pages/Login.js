@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-// import { SignInUnicornUser } from '../services/Auth'
+import { LoginUnicornUser } from '../services/Auth'
 
 const Login = ({ setUnicornUser, toggleAuthenticated }) => {
   let navigate = useNavigate()
-  const [formValues, setFormValues] = useState({ username: '', password: '' })
+  const [formValues, setFormValues] = useState({ email: '', password: '' })
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -12,11 +12,11 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // const payload = await SignInUnicornUser(formValues)
-    setFormValues({ username: '', password: '' })
-    // setUnicornUser(payload)
+    const payload = await LoginUnicornUser(formValues)
+    setFormValues({ email: '', password: '' })
+    setUnicornUser(payload)
     toggleAuthenticated(true)
-    navigate('/home')
+    navigate('/')
   }
 
   return (
@@ -24,13 +24,13 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
       <h1>Login!</h1>
       <div className="login-forms">
         <div className="input-wrapper">
-          <label htmlFor="username">Username </label>
+          <label htmlFor="username">Email </label>
           <input
             onChange={handleChange}
-            name="username"
-            type="username"
-            placeholder="Choose Username"
-            value={formValues.username}
+            name="email"
+            type="email"
+            placeholder="Enter Email"
+            value={formValues.email}
             required
           />
         </div>
@@ -48,7 +48,7 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
           <button
             className="glow-on-hover-login"
             onClick={handleSubmit}
-            disabled={!formValues.username || !formValues.password}
+            disabled={!formValues.email || !formValues.password}
           >
             Login
           </button>
