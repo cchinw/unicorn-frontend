@@ -12,6 +12,7 @@ Client.interceptors.request.use(
     if (token) {
       config.headers['authorization'] = `Token ${token}`
       // 'Content-Type': multipart ? 'multipart/form-data' : 'application/json',
+      config.headers['Content-Type'] = 'multipart/form-data'
     }
     return config
   },

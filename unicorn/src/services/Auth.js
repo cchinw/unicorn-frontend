@@ -5,6 +5,7 @@ export const RegisterUnicornUser = async (data) => {
   try {
     const res = await Client.post('/register/user', data)
     return res.data
+    console.log(res.data, 'register user!')
   } catch (error) {
     throw error
   }

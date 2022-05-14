@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { RegisterUnicornUser } from '../services/Auth'
 import { useNavigate } from 'react-router-dom'
 import Client from '../services/api'
@@ -22,65 +22,38 @@ const Register = ({
     bio: '',
     avatar: File,
     email: '',
-    password: '',
-    confirmPassword: ''
+    password1: '',
+    password2: ''
   })
 
-  const getAllUsers = async () => {
-    const response = Client.get(`/register/user`)
-    let loadUsernames = []
-    let loadEmails = []
-
-    // Getting all usernames and emails that currently exists and checks if the username and email they input is unique. If not, it throws an error.
-    for (let i = 0; i < response.data.length; i++) {
-      loadUsernames.push(response.data[i].username)
-      loadEmails.push(response.data[i].email)
-    }
-    setUsernames(loadUsernames)
-    setEmails(loadEmails)
-  }
-
-  useEffect(() => {
-    getAllUsers()
-  }, [])
+  console.log(formValues, 'FORMVALUES')
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (usernames.indexOf(formValues.username) !== -1) {
-      setOpenModal(true)
-      setHeader('Please Try another Username')
-      setErrorMessage('Account with that username already exists')
-    }
-    if (emails.indexOf(formValues.email) !== -1) {
-      setOpenModal(true)
-      setHeader('Please Try another Email')
-      setErrorMessage('Account with that email already exists')
-    }
-    if (formValues.password !== formValues.confirmPassword) {
-      setOpenModal(true)
-      setHeader('Your passwords do not match!')
-      setErrorMessage('Please confirm passwords and try again')
-    }
-    await RegisterUnicornUser({
+    e.preventDefault({
       username: formValues.username,
       bio: formValues.bio,
       avatar: formValues.avatar,
       email: formValues.email,
-      password: formValues.password
+      password1: formValues.password1,
+      password2: formValues.password2
     })
-    setFormValues({
-      username: '',
-      bio: '',
-      avatar: File,
-      email: '',
-      password: '',
-      confirmPassword: ''
-    })
-    navigate('/login')
+    let formData = new FormData()
+    formData.append('username', formValues.username || '')
+    formData.append('bio', formValues.bio || '')
+    formData.append('avatar', formValues.avatar || '')
+    formData.append('email', formValues.email || '')
+    formData.append('password1', formValues.password1 || '')
+    formData.append('password2', formValues.password2 || '')
+
+    const res = await RegisterUnicornUser(formData)
+    console.log(res, 'RESPONSE FOR REGISTER')
+
+    // navigate('/login')
+    console.log(formValues, 'HANDLESUBMIT')
   }
 
   return (
