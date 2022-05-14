@@ -33,7 +33,7 @@ const Home = ({
         <h1>Welcome to Unicorn</h1>
         <h3>Where you do not have to deal with loss on your own</h3>
       </div>
-      <h3>Learn about the The 7 Stages of Grief</h3>
+      <h3 className="title-header">Learn about the The 7 Stages of Grief</h3>
       <div className="stages-of-grief">
         {griefStages.map((stage, index) => (
           <GriefStage
@@ -54,7 +54,7 @@ const Home = ({
           />
         ))}
       </div>
-      <div>
+      <div className="grief-intro">
         <h3>We are all here because we have all lost someone</h3>
         <p>
           When you lose someone you love, it’s hard to imagine life without

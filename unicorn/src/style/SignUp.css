@@ -4,13 +4,20 @@
   padding: 70px 50px 70px 50px;
   box-shadow: 12px 12px 22px grey ;
   display: block;
+  background-color: #a9609e;
+  width: 50vh;
+  align-content: center;
 }
+
+
 
 .card-overlay h1, .login-page h1{
   margin-bottom: 30px;
+  color: white;
 }
 .login-page label{
   float: left;
+  color: white;
 }
 
 .card-overlay input, .login-page input, .com-input, .profile input{
@@ -28,5 +35,10 @@
 
 .glow-on-hover-register, .glow-on-hover-login{
   margin-top: 30px;
+  color: white;
+  font-weight: bolder;
 }
 
+#file-upload-button {
+  background-color: darkcyan;
+}

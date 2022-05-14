@@ -1,21 +1,45 @@
 
 .title h1 {
   color: white;
-  background-color: #1D2A3A;
+  background-color: #a9609e;
   font-size: 3rem;
-  padding: 50px 0 0 0;
 }
 
 .title h3 {
   color: white;
-  background-color: #1D2A3A;
+  background-color: #a9609e;
   font-size: 1rem;
   margin-top: -34px;
 }
 
-.title h4 {
-  color: #1D2A3A;
-  font-size: 1.5rem;
+.title-header{
+  color: #a9609e;
+  animation: float 5s ease 2s infinite ;
+}
+
+.grief-intro{
+  animation: float 5s ease 2s infinite ;
+  margin-bottom: 30px;
+  padding: 50px;
+  color: #a9609e;
+}
+
+.grief-intro p {
+  margin-bottom: 30px;
+  color: white;
+  background-color: #a9609e;
+}
+
+.grief-stage-title {
+  color: white;
+  background-color: #a9609e;;
+  animation: float 5s ease 2s infinite ;
+}
+
+.title {
+  /* color: #a9609e; */
+  margin-top: -35px;
+  animation: float 5s ease 2s infinite ;
 }
 
 .stages-of-grief {

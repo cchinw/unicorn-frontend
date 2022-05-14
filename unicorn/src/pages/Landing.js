@@ -21,20 +21,20 @@ const Landing = ({ isHovering, setIsHovering, image, setImage }) => {
           alt="logo"
           style={{
             zIndex: `12`,
-            height: '50vh',
-            width: '50vh',
+            height: '60vh',
+            width: '60vh',
             animation: `float 5s ease 2s infinite`,
-            borderRadius: `50%`
+            borderRadius: `80%`
           }}
         />
-        <div className="stars-orbit">
+        {/* <div className="stars-orbit">
           <img className="unicorn-stars1" src={stars1} alt="star" />
           <img className="unicorn-stars2" src={stars2} alt="star" />
           <img className="unicorn-stars3" src={stars3} alt="star" />
-        </div>
-        <div className="unicorn-skies"></div>
+        </div> */}
+        {/* <div className="unicorn-skies"></div> */}
       </div>
-      -<div className="register-logoIn"></div>
+      {/* <div className="register-logoIn"></div> */}
     </div>
   )
 }

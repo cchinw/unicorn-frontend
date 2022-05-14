@@ -20,7 +20,7 @@ const GriefStage = ({griefStage, title, description, image, unicornUser, setUnic
           <img className='grief-image' src={image}/>
         </div>
       </Link>
-      <h4>{title}</h4>
+      <h4 className='grief-stage-title'>{title}</h4>
     </div>
   </div>
   )

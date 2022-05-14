@@ -3,18 +3,7 @@ import { RegisterUnicornUser } from '../services/Auth'
 import { useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 
-const Register = ({
-  usernames,
-  setUsernames,
-  emails,
-  setEmails,
-  openModal,
-  setOpenModal,
-  errorMessage,
-  setErrorMessage,
-  header,
-  setHeader
-}) => {
+const Register = ({}) => {
   let navigate = useNavigate()
 
   const [formValues, setFormValues] = useState({
@@ -52,8 +41,8 @@ const Register = ({
     const res = await RegisterUnicornUser(formData)
     console.log(res, 'RESPONSE FOR REGISTER')
 
-    // navigate('/login')
-    console.log(formValues, 'HANDLESUBMIT')
+    navigate('/login')
+    console.log(formValues, 'HANDLECHANGE')
   }
 
   return (
@@ -125,11 +114,11 @@ const Register = ({
             className="glow-on-hover-register"
             disabled={
               !formValues.username ||
-              (!formValues.password &&
-                formValues.confirmPassword === formValues.password)
+              (!formValues.password1 &&
+                formValues.password2 === formValues.password1)
             }
           >
-            Sign In
+            Register
           </button>
         </form>
       </div>

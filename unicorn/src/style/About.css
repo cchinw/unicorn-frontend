@@ -1,5 +1,7 @@
 .abouttext{
   margin-top: 30px;
+  color: #a9609e;
+  animation: float 5s ease 2s infinite ;
 }
 
 .aboutheader {
@@ -10,10 +12,19 @@
 .about-pretext {
   margin-bottom: 30px;
   padding: 50px;
+  color: white;
+  background-color: #a9609e;
+}
+
+.unicorn-text {
+  height: -100px;
+  width: 100px;
 }
 
 .about-pretext p {
   margin-bottom: 30px;
+  color: white;
+  background-color: #a9609e;;
 }
 
 .about-pretext p span {
@@ -28,7 +39,8 @@
 }
 
 .linkedin{
-  font-size: xx-small;
+  font-size: small;
   text-decoration: wavy;
   font-weight: bold;
+  color: #a9609e;
 }
