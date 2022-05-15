@@ -16,19 +16,19 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
       email: formValues.email,
       password: formValues.password
     })
-    let formData = new FormData()
-    formData.append('email', formValues.email || '')
-    formData.append('password', formValues.password || '')
+    // let formData = new FormData()
+    // formData.append('email', formValues.email || '')
+    // formData.append('password', formValues.password || '')
 
     axios({
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
+        'Content-Type': 'multipart/form-data'
+        // Accept: 'application/json'
       },
       method: 'post',
-      url: API_BASE_URL + '/rest-auth/login/',
+      url: API_BASE_URL + '/rest-auth/accounts/login/',
       withCredentials: true,
-      data: formData
+      data: formValues
     })
       .then((response) => {
         if (response.status === 201) {

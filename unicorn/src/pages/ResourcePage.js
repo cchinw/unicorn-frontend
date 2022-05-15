@@ -17,15 +17,15 @@ const ResourcePage = ({ resources, setResources }) => {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      method: 'get',
-      url: API_BASE_URL + '/unicorn/api/list/resources'
-      // withCredentials: true
+      method: 'GET',
+      url: API_BASE_URL + '/unicorn/api/list/resources',
+      withCredentials: true
     })
       .then((response) => {
-        if (response.status === 201) {
-          setResources(response.data)
-          console.log(response, 'RESOURCES')
-        }
+        const data = response.data
+        console.log(data, 'RESPONSE')
+        setResources(data)
+        console.log(resources, 'LIST RESOURCES')
       })
       .catch((error) => {
         if (error.response) {
