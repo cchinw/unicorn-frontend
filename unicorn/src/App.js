@@ -219,6 +219,8 @@ function App() {
             path="/griefstage/:griefStageId"
             element={
               <GriefStagePage
+                griefStages={griefStages}
+                setGriefStages={setGriefStages}
                 griefStage={griefStage}
                 setGriefStage={setGriefStage}
                 communities={communities}
@@ -242,6 +244,8 @@ function App() {
               <CommunityPage
                 community={community}
                 setCommunity={setCommunity}
+                communities={communities}
+                setCommunities={setCommunities}
                 unicornUser={unicornUser}
                 setUnicornUser={setUnicornUser}
                 unicornUsers={unicornUsers}

@@ -22,8 +22,8 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
 
     axios({
       headers: {
-        'Content-Type': 'multipart/form-data'
-        // Accept: 'application/json'
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
       },
       method: 'post',
       url: API_BASE_URL + '/rest-auth/accounts/login/',
@@ -31,7 +31,7 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
       data: formValues
     })
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           navigate('/communities')
         }
       })

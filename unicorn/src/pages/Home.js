@@ -19,7 +19,6 @@ const Home = ({
   setErrorMessage
 }) => {
   let navigate = useNavigate()
-  console.log(griefStages)
 
   // const getGriefStages = async () => {
   //   const res = Client.get(`/unicorn/api/list/grief-stages`)
@@ -28,25 +27,28 @@ const Home = ({
   // }
 
   const getGriefStages = () => {
+    const token = 'c8f9b81d5c9a1fefe6772260e3e75545ba57a921'
     axios({
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        Authorization: `Token ${token}`
       },
-      method: 'GET',
+      method: 'get',
       url: API_BASE_URL + '/unicorn/api/list/grief-stages',
-      withCredentials: false
+      withCredentials: true
     })
       .then((response) => {
-        const data = response.data
-        console.log(data, 'RESPONSE')
+        // console.log(response, 'RESPONSE!!!!!!')
+        const data = response.data.results
+        // console.log(data, 'RESPONSE')
         setGriefStages(data)
-        console.log(griefStages, 'GET GRIEF STAGES')
+        // console.log(griefStages, 'GET GRIEF STAGES')
       })
       .catch((error) => {
         if (error.response) {
           //Get popup library for alerts
-          console.log('Error', error.message)
+          // console.log('Error', error.message)
         }
       })
   }
