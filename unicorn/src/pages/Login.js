@@ -16,6 +16,9 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
       email: formValues.email,
       password: formValues.password
     })
+    let formData = new FormData()
+    formData.append('email', formValues.email || '')
+    formData.append('password', formValues.password || '')
 
     axios({
       headers: {
@@ -23,8 +26,9 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
         Accept: 'application/json'
       },
       method: 'post',
-      url: API_BASE_URL + '/rest-auth/accounts/login/',
-      withCredentials: true
+      url: API_BASE_URL + '/rest-auth/login/',
+      withCredentials: true,
+      data: formData
     })
       .then((response) => {
         if (response.status === 201) {
@@ -65,11 +69,7 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
           />
         </div>
         <div>
-          <button
-            className="glow-on-hover-login"
-            onClick={handleSubmit}
-            disabled={!formValues.email || !formValues.password}
-          >
+          <button className="glow-on-hover-login" onClick={handleSubmit}>
             Login
           </button>
         </div>

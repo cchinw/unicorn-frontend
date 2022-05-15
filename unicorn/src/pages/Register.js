@@ -7,13 +7,13 @@ import { useNavigate } from 'react-router-dom'
 const Register = ({ setOpenModal, setHeader, setPopupMessage }) => {
   let navigate = useNavigate()
 
-  const toBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = () => resolve(reader.result)
-      reader.onerror = (error) => reject(error)
-    })
+  // const toBase64 = (file) =>
+  //   new Promise((resolve, reject) => {
+  //     const reader = new FileReader()
+  //     reader.readAsDataURL(file)
+  //     reader.onload = () => resolve(reader.result)
+  //     reader.onerror = (error) => reject(error)
+  //   })
 
   const [formValues, setFormValues] = useState({
     username: '',
@@ -112,7 +112,7 @@ const Register = ({ setOpenModal, setHeader, setPopupMessage }) => {
               onChange={handleChange}
               name="email"
               type="email"
-              placeholder="email"
+              placeholder="Enter Email"
               value={formValues.email}
               required
             />

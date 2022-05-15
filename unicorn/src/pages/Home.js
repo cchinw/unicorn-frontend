@@ -1,7 +1,9 @@
 import GriefStage from '../components/GriefStage'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { API_BASE_URL } from '../constants/apiConstants'
+// import { API_BASE_URL } from '../constants/apiConstants'
+// import axios from 'axios'
+import Client from '../services/api'
 import Griever from '../assets/UnicornMainLogo.png'
 
 const Home = ({
@@ -17,15 +19,42 @@ const Home = ({
   setErrorMessage
 }) => {
   let navigate = useNavigate()
+  console.log(griefStages)
 
-  // const getGriefStages = async () => {
-  //   const res = await Client.get(`/list/grief-stages`)
-  //   setGriefStages(res.data)
+  const getGriefStages = async () => {
+    const res = Client.get(`/unicorn/api/list/grief-stages`)
+    setGriefStages(res.data)
+    console.log(res.data, 'GRIEFSTAGES')
+  }
+
+  // const getGriefStages = () => {
+  // axios({
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     Accept: 'application/json'
+  //   },
+  //   method: 'get',
+  //   url: API_BASE_URL + '/unicorn/api/list/grief-stages',
+  //   withCredentials: false
+  // })
+  //   .then((response) => {
+  //     console.log(response, 'RESPONSE')
+  //     if (response.status === 201) {
+  //       setGriefStages()
+  //       console.log(griefStages, 'GET GRIEF STAGES')
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     if (error.response) {
+  //       //Get popup library for alerts
+  //       console.log('Error', error.message)
+  //     }
+  //   })
   // }
 
-  // useEffect(() => {
-  //   getGriefStages()
-  // }, [])
+  useEffect(() => {
+    getGriefStages()
+  }, [])
 
   return (
     <div className="home">

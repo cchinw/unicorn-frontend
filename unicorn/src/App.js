@@ -96,41 +96,41 @@ function App() {
     localStorage.clear()
   }
 
-  // Check each time if the user is a pilgrim and authenticated to make certain commands
+  // // Check each time if the user is a pilgrim and authenticated to make certain commands
 
-  const checkSession = () => {
-    const user = axios({
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      method: 'get',
-      url: API_BASE_URL + '/rest-auth/user/',
-      withCredentials: true
-    })
-      .then((response) => {
-        if (response.status === 201) {
-          setUnicornUser(unicornUser)
-          toggleAuthenticated(true)
-        }
-      })
-      .catch((error) => {
-        if (error.response) {
-          setOpenModal(true)
-          setHeader('Uh-Oh')
-          setPopupMessage('Please login to continue!')
-          console.log('Error', error.message)
-        }
-      })
-  }
+  // const checkSession = () => {
+  //   const user = axios({
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Accept: 'application/json'
+  //     },
+  //     method: 'get',
+  //     url: API_BASE_URL + '/rest-auth/user/',
+  //     withCredentials: true
+  //   })
+  //     .then((response) => {
+  //       if (response.status === 201) {
+  //         setUnicornUser(unicornUser)
+  //         toggleAuthenticated(true)
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       if (error.response) {
+  //         setOpenModal(true)
+  //         setHeader('Uh-Oh')
+  //         setPopupMessage('Please login to continue!')
+  //         console.log('Error', error.message)
+  //       }
+  //     })
+  // }
 
-  // Verify token
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      checkSession()
-    }
-  }, [])
+  // // Verify token
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token')
+  //   if (token) {
+  //     checkSession()
+  //   }
+  // }, [])
 
   return (
     <div className="App">
@@ -343,9 +343,11 @@ function App() {
             path="/resources"
             element={
               <ResourcePage
-                unicornUser={unicornUser}
-                nonUserUnicorn={nonUserUnicorn}
-                setNonUserUnicorn={setNonUserUnicorn}
+                // unicornUser={unicornUser}
+                // nonUserUnicorn={nonUserUnicorn}
+                // setNonUserUnicorn={setNonUserUnicorn}
+                resources={resources}
+                setResources={setResources}
               />
             }
           />
