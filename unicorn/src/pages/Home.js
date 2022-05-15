@@ -16,7 +16,8 @@ const Home = ({
   errorMessage,
   header,
   setHeader,
-  setErrorMessage
+  setErrorMessage,
+  token
 }) => {
   let navigate = useNavigate()
 
@@ -27,7 +28,6 @@ const Home = ({
   // }
 
   const getGriefStages = () => {
-    const token = 'c8f9b81d5c9a1fefe6772260e3e75545ba57a921'
     axios({
       headers: {
         'Content-Type': 'application/json',

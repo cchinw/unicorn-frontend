@@ -28,6 +28,7 @@ import { API_BASE_URL } from './constants/apiConstants'
 import axios from 'axios'
 
 function App() {
+  const token = process.env.TOKEN
   // User State
   const [authenticated, toggleAuthenticated] = useState(false)
   const [unicornUser, setUnicornUser] = useState(null)
@@ -211,6 +212,7 @@ function App() {
                 setPopupMessage={setPopupMessage}
                 header={header}
                 setHeader={setHeader}
+                token={token}
               />
             }
           />
@@ -235,6 +237,7 @@ function App() {
                 setPopupMessage={setPopupMessage}
                 resources={resources}
                 setResources={setResources}
+                token={token}
               />
             }
           />
@@ -294,6 +297,7 @@ function App() {
                 toggleReload={toggleReload}
                 reloads={reloads}
                 setReloads={setReloads}
+                token={token}
               />
             }
           />
@@ -309,6 +313,7 @@ function App() {
                 setGriefStage={setGriefStage}
                 directMessage={directMessage}
                 setDirectMessage={setDirectMessage}
+                token={token}
               />
             }
           />
@@ -324,6 +329,7 @@ function App() {
                 setGriefStage={setGriefStage}
                 directMessage={directMessage}
                 setDirectMessage={setDirectMessage}
+                token={token}
               />
             }
           />
@@ -340,6 +346,7 @@ function App() {
                 setGriefStage={setGriefStage}
                 directMessage={directMessage}
                 setDirectMessage={setDirectMessage}
+                token={token}
               />
             }
           />
@@ -352,6 +359,7 @@ function App() {
                 // setNonUserUnicorn={setNonUserUnicorn}
                 resources={resources}
                 setResources={setResources}
+                token={token}
               />
             }
           />
@@ -363,6 +371,7 @@ function App() {
                 setUnicornUser={setUnicornUser}
                 nonUserUnicorn={nonUserUnicorn}
                 setNonUserUnicorn={setNonUserUnicorn}
+                token={token}
               />
             }
           />
