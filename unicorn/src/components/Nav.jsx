@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 import Logo from '../assets/UnicornMainLogo.png'
 
 const Nav = ({authenticated, unicornUser, handleLogout}) => {
@@ -90,6 +90,7 @@ const Nav = ({authenticated, unicornUser, handleLogout}) => {
     <nav className="publicOption nav-body">
       <Link to="/landing-page">Home</Link>
       <Link to="/about">About Unicorn</Link>
+      <Link to="/resources">Resources</Link>
       <Link to="/register">Register</Link>
       <Link to="/login">Sign In</Link>
     </nav>

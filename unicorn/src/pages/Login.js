@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LoginUnicornUser } from '../services/Auth'
+import { API_BASE_URL } from '../constants/apiConstants'
+import axios from 'axios'
 
 const Login = ({ setUnicornUser, toggleAuthenticated }) => {
   let navigate = useNavigate()
@@ -11,12 +12,31 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const payload = await LoginUnicornUser(formValues)
-    setFormValues({ email: '', password: '' })
-    setUnicornUser(payload)
-    toggleAuthenticated(true)
-    navigate('/')
+    e.preventDefault({
+      email: formValues.email,
+      password: formValues.password
+    })
+
+    axios({
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      method: 'post',
+      url: API_BASE_URL + '/rest-auth/accounts/login/',
+      withCredentials: true
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          navigate('/communities')
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          //Get popup library for alerts
+          console.log('Error', error.message)
+        }
+      })
   }
 
   return (

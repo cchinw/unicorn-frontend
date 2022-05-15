@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Client from "../services/api"
 import CreateCommunity from './CreateCommunity'
+import { API_BASE_URL } from "../constants/apiConstants"
+
 
 const Community = (props) => {
 
@@ -9,7 +10,8 @@ const Community = (props) => {
   const [creating, toggleCreating] = useState(false)
 
   const getCommunities = async () => {
-    const res = Client.get(`/list/communities/${props.griefStageId}`)
+    const res = ''
+    // const res = Client.get(`/list/communities/${props.griefStageId}`)
     console.log(res, 'GET COMMUNITIES BY GRIEF ID')
     let populations = []
     for (let i = 0; i < res.data.length; i++) {
@@ -21,9 +23,9 @@ const Community = (props) => {
     populations.reverse()
     const communitiesSort = []
     for (let i = 0; i < populations.length; i++) {
-      const communitySort = Client.get(`/list/communities/${populations[i][0]}`)
-      console.log(communitySort, 'COMMUNITY POPULATION')
-      communitiesSort.push(communitySort.data)
+      // const communitySort = Client.get(`/list/communities/${populations[i][0]}`)
+      // console.log(communitySort, 'COMMUNITY POPULATION')
+      // communitiesSort.push(communitySort.data)
     }
     props.setCommunities(communitiesSort)
   }

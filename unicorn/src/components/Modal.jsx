@@ -1,5 +1,5 @@
 
-const Modal = ({setOpenModal, errorMessage, header}) => {
+const Modal = ({setOpenModal, message, header}) => {
 
   return (
     <div>
@@ -11,7 +11,7 @@ const Modal = ({setOpenModal, errorMessage, header}) => {
             </div>
 
             <div className="modal-body">
-              <p className="modalText">{errorMessage}<span className="modalImage"><img src="http://media2.giphy.com/media/26vUw5sYGcqmMDoBy/giphy.gif" alt="unicorn"/></span></p>
+              <p className="modalText">{message}<span className="modalImage"><img src="http://media2.giphy.com/media/26vUw5sYGcqmMDoBy/giphy.gif" alt="unicorn"/></span></p>
             </div>
 
             <div className="modal-footer">

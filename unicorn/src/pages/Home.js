@@ -1,7 +1,7 @@
 import GriefStage from '../components/GriefStage'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Client from '../services/api'
+import { API_BASE_URL } from '../constants/apiConstants'
 import Griever from '../assets/UnicornMainLogo.png'
 
 const Home = ({
@@ -18,14 +18,14 @@ const Home = ({
 }) => {
   let navigate = useNavigate()
 
-  const getGriefStages = async () => {
-    const res = await Client.get(`/list/grief-stages`)
-    setGriefStages(res.data)
-  }
+  // const getGriefStages = async () => {
+  //   const res = await Client.get(`/list/grief-stages`)
+  //   setGriefStages(res.data)
+  // }
 
-  useEffect(() => {
-    getGriefStages()
-  }, [])
+  // useEffect(() => {
+  //   getGriefStages()
+  // }, [])
 
   return (
     <div className="home">

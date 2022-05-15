@@ -9,7 +9,6 @@ import './style/SignUp.css'
 import './style/Button.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { CheckSession } from './services/Auth'
 import About from './pages/About'
 import Home from './pages/Home'
 import Register from './pages/Register'
@@ -19,10 +18,14 @@ import UnicornProfile from './pages/UnicornProfile'
 import CommunityPage from './pages/CommunityPage'
 import DiscussionPage from './pages/DiscussionPage'
 import GriefStagePage from './pages/GriefStagePage'
+import ResourcePage from './pages/ResourcePage'
+import VerifyEmail from './pages/VerifyEmail'
 import Modal from './components/Modal'
 import Nav from './components/Nav'
 import Profile from './components/Profile'
-import Resource from './components/Resource'
+import Community from './components/Community'
+import { API_BASE_URL } from './constants/apiConstants'
+import axios from 'axios'
 
 function App() {
   // User State
@@ -72,15 +75,15 @@ function App() {
 
   // Modal State
   const [openModal, setOpenModal] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
+  const [popupMessage, setPopupMessage] = useState('')
   const [header, setHeader] = useState('')
 
   // Landing Page State
   const [isHovering, setIsHovering] = useState(false)
   const [image, setImage] = useState(null)
 
-  // Direct Message State
-  const [directMessages, setDirectMessages] = useState([])
+  // Direct popupMessage State
+  const [directMessage, setDirectMessage] = useState([])
 
   // Resources State
   const [resources, setResources] = useState([])
@@ -94,26 +97,47 @@ function App() {
   }
 
   // Check each time if the user is a pilgrim and authenticated to make certain commands
-  // const checkToken = async () => {
-  //   const unicornUser = await CheckSession()
-  //   setUnicornUser(unicornUser)
-  //   toggleAuthenticated(true)
-  // }
+
+  const checkSession = () => {
+    const user = axios({
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      method: 'get',
+      url: API_BASE_URL + '/rest-auth/user/',
+      withCredentials: true
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          setUnicornUser(unicornUser)
+          toggleAuthenticated(true)
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          setOpenModal(true)
+          setHeader('Uh-Oh')
+          setPopupMessage('Please login to continue!')
+          console.log('Error', error.message)
+        }
+      })
+  }
 
   // Verify token
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //     checkToken()
-  //   }
-  // }, [])
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkSession()
+    }
+  }, [])
 
   return (
     <div className="App">
       {openModal && (
         <Modal
           setOpenModal={setOpenModal}
-          errorMessage={errorMessage}
+          popupMessage={popupMessage}
           header={header}
         />
       )}
@@ -151,8 +175,8 @@ function App() {
                 setOpenModal={setOpenModal}
                 header={header}
                 setHeader={setHeader}
-                errorMessage={errorMessage}
-                setErrorMessage={setErrorMessage}
+                popupMessage={popupMessage}
+                setPopupMessage={setPopupMessage}
               />
             }
           />
@@ -166,10 +190,10 @@ function App() {
                 setEmails={setEmails}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
-                errorMessage={errorMessage}
+                popupMessage={popupMessage}
                 header={header}
                 setHeader={setHeader}
-                setErrorMessage={setErrorMessage}
+                setPopupMessage={setPopupMessage}
               />
             }
           />
@@ -183,8 +207,8 @@ function App() {
                 setUnicornUser={setUnicornUser}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
-                errorMessage={errorMessage}
-                setErrorMessage={setErrorMessage}
+                popupMessage={popupMessage}
+                setPopupMessage={setPopupMessage}
                 header={header}
                 setHeader={setHeader}
               />
@@ -205,15 +229,15 @@ function App() {
                 setOpenModal={setOpenModal}
                 header={header}
                 setHeader={setHeader}
-                errorMessage={errorMessage}
-                setErrorMessage={setErrorMessage}
+                popupMessage={popupMessage}
+                setPopupMessage={setPopupMessage}
                 resources={resources}
                 setResources={setResources}
               />
             }
           />
           <Route
-            path="/communitypage/:id"
+            path="/communities"
             element={
               <CommunityPage
                 community={community}
@@ -232,8 +256,8 @@ function App() {
                 setOpenModal={setOpenModal}
                 header={header}
                 setHeader={setHeader}
-                errorMessage={errorMessage}
-                setErrorMessage={setErrorMessage}
+                popupMessage={popupMessage}
+                setPopupMessage={setPopupMessage}
                 upvote={upvote}
                 setUpvote={setUpvote}
                 clicked={clicked}
@@ -270,6 +294,21 @@ function App() {
             }
           />
           <Route
+            path="/communities/:id"
+            element={
+              <Community
+                unicornUser={unicornUser}
+                setUnicornUser={setUnicornUser}
+                community={community}
+                setCommunity={setCommunity}
+                griefStage={griefStage}
+                setGriefStage={setGriefStage}
+                directMessage={directMessage}
+                setDirectMessage={setDirectMessage}
+              />
+            }
+          />
+          <Route
             path="/profile"
             element={
               <Profile
@@ -279,8 +318,8 @@ function App() {
                 setCommunity={setCommunity}
                 griefStage={griefStage}
                 setGriefStage={setGriefStage}
-                directMessages={directMessages}
-                setDirectMessages={setDirectMessages}
+                directMessage={directMessage}
+                setDirectMessage={setDirectMessage}
               />
             }
           />
@@ -295,25 +334,32 @@ function App() {
                 setCommunity={setCommunity}
                 griefStage={griefStage}
                 setGriefStage={setGriefStage}
-                directMessages={directMessages}
-                setDirectMessages={setDirectMessages}
+                directMessage={directMessage}
+                setDirectMessage={setDirectMessage}
               />
             }
           />
-          {/* <Route
+          <Route
             path="/resources"
             element={
-              <Resource
+              <ResourcePage
                 unicornUser={unicornUser}
                 nonUserUnicorn={nonUserUnicorn}
                 setNonUserUnicorn={setNonUserUnicorn}
-                community={community}
-                setCommunity={setCommunity}
-                griefStage={griefStage}
-                setGriefStage={setGriefStage}
               />
             }
-          /> */}
+          />
+          <Route
+            path="/auth/verify-email/:key"
+            element={
+              <VerifyEmail
+                unicornUser={unicornUser}
+                setUnicornUser={setUnicornUser}
+                nonUserUnicorn={nonUserUnicorn}
+                setNonUserUnicorn={setNonUserUnicorn}
+              />
+            }
+          />
         </Routes>
       </main>
     </div>

@@ -1,55 +1,82 @@
-import { useState } from 'react'
-import { RegisterUnicornUser } from '../services/Auth'
-import { useNavigate } from 'react-router-dom'
-import Client from '../services/api'
+import axios from 'axios'
+import { API_BASE_URL } from '../constants/apiConstants'
 
-const Register = ({}) => {
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+const Register = ({ setOpenModal, setHeader, setPopupMessage }) => {
   let navigate = useNavigate()
+
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = (error) => reject(error)
+    })
 
   const [formValues, setFormValues] = useState({
     username: '',
     bio: '',
-    avatar: File,
     email: '',
     password1: '',
     password2: ''
   })
-
-  console.log(formValues, 'FORMVALUES')
+  const [avatar, setAvatar] = useState(null)
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
+  // const handleAvatar = (e) => {
+  //   setAvatar({avatar: e.target.files[0]})
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault({
       username: formValues.username,
       bio: formValues.bio,
-      avatar: formValues.avatar,
+      avatar: avatar,
       email: formValues.email,
       password1: formValues.password1,
       password2: formValues.password2
     })
+    console.log('HANDLE SUBMIT WORKS!')
+    // const avatar = await toBase64(avatar.avatar)
     let formData = new FormData()
     formData.append('username', formValues.username || '')
     formData.append('bio', formValues.bio || '')
-    formData.append('avatar', formValues.avatar || '')
+    formData.append('avatar', avatar)
     formData.append('email', formValues.email || '')
     formData.append('password1', formValues.password1 || '')
     formData.append('password2', formValues.password2 || '')
 
-    const res = await RegisterUnicornUser(formData)
-    console.log(res, 'RESPONSE FOR REGISTER')
-
-    navigate('/login')
-    console.log(formValues, 'HANDLECHANGE')
+    axios({
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      method: 'post',
+      url: API_BASE_URL + '/rest-auth/unicorn/registration/',
+      data: formData,
+      withCredentials: false
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          navigate('/login')
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          //Get popup library for alerts
+          console.log('Error', error.message)
+        }
+      })
   }
 
   return (
     <div className="register col">
       <div className="card-overlay centered">
         <h1>Register!</h1>
-        <form className="forms" onSubmit={handleSubmit}>
+        <form className="forms">
           <div className="input-wrapper">
             <input
               onChange={handleChange}
@@ -73,11 +100,11 @@ const Register = ({}) => {
           </div>
           <div className="unicorn-user-avatar">
             <input
-              onChange={handleChange}
-              placeholder="Profile avatar"
-              name="avatar"
               type="file"
-              value={formValues.avatar}
+              accept="image/png, image/jpeg"
+              onChange={(e) => {
+                setAvatar(e.target.files[0])
+              }}
             />
           </div>
           <div className="input-wrapper">
@@ -94,9 +121,9 @@ const Register = ({}) => {
             <input
               onChange={handleChange}
               type="password"
-              name="password"
+              name="password1"
               placeholder="password"
-              value={formValues.password}
+              value={formValues.password1}
               required
             />
           </div>
@@ -105,19 +132,12 @@ const Register = ({}) => {
               onChange={handleChange}
               placeholder="confirm password"
               type="password"
-              name="confirmPassword"
-              value={formValues.confirmPassword}
+              name="password2"
+              value={formValues.password2}
               required
             />
           </div>
-          <button
-            className="glow-on-hover-register"
-            disabled={
-              !formValues.username ||
-              (!formValues.password1 &&
-                formValues.password2 === formValues.password1)
-            }
-          >
+          <button className="glow-on-hover-register" onClick={handleSubmit}>
             Register
           </button>
         </form>
