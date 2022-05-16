@@ -34,7 +34,7 @@ function App() {
   let token = '5d1ff085cc94337ebc0053dfcffd8220acd3c12c'
   // User State
   const [authenticated, toggleAuthenticated] = useState(false)
-  const [unicornUser, setUnicornUser] = useState('')
+  const [unicornUser, setUnicornUser] = useState(false)
   const [unicornUsers, setUnicornUsers] = useState([])
   const [nonUserUnicorn, setNonUserUnicorn] = useState({
     username: '',
@@ -104,6 +104,20 @@ function App() {
     localStorage.clear()
   }
 
+  const checkSession = () => {
+    let user = localStorage.getItem('userId')
+    if (user) {
+      setUnicornUser(true)
+    }
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkSession()
+    }
+  }, [])
+
   // // Check each time if the user is a pilgrim and authenticated to make certain commands
 
   // const checkSession = () => {
@@ -132,14 +146,6 @@ function App() {
   //     })
   // }
 
-  // // Verify token
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //     checkSession()
-  //   }
-  // }, [])
-
   return (
     <div className="App">
       {openModal && (
@@ -157,7 +163,7 @@ function App() {
       <main>
         <Routes>
           <Route
-            path="/landing-page"
+            path="/"
             element={
               <Landing
                 setUnicornUser={setUnicornUser}
@@ -207,7 +213,7 @@ function App() {
             }
           />
           <Route
-            path="/"
+            path="/feed"
             element={
               <Home
                 setGriefStages={setGriefStages}

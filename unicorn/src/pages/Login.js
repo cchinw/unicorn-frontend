@@ -21,10 +21,9 @@ const Login = ({ setUnicornUser, toggleAuthenticated, token }) => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
-        // Authorization: `Token ${token}`
       },
       method: 'post',
-      url: API_BASE_URL + '/rest-auth/login/',
+      url: API_BASE_URL + '/rest-auth/unicorn/login/',
       withCredentials: true,
       data: formValues
     })
@@ -33,6 +32,9 @@ const Login = ({ setUnicornUser, toggleAuthenticated, token }) => {
         if (response.status === 200) {
           console.log(response.data, 'LOGIN WORKS')
           navigate('/feed')
+          localStorage.setItem('token', response.data.key)
+          localStorage.setItem('username', response.data.username)
+          localStorage.setItem('userId', response.data.user_id)
         }
       })
       .catch((error) => {
@@ -45,9 +47,9 @@ const Login = ({ setUnicornUser, toggleAuthenticated, token }) => {
   }
 
   return (
-    <div className="login-page">
-      <h1>Login!</h1>
-      <div className="login-forms">
+    <div className="register-col">
+      <div className="card-overlay centered">
+        <h1>Login!</h1>
         <div className="input-wrapper">
           <label htmlFor="email">Email </label>
           <input

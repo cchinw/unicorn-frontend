@@ -62,7 +62,7 @@ const Register = ({ setOpenModal, setHeader, setPopupMessage }) => {
   }
 
   return (
-    <div className="register col">
+    <div className="register-col">
       <div className="card-overlay centered">
         <h1>Register!</h1>
         <form className="forms">
@@ -89,6 +89,7 @@ const Register = ({ setOpenModal, setHeader, setPopupMessage }) => {
           </div>
           <div className="unicorn-user-avatar">
             <input
+              className="upload-box"
               type="file"
               accept="image/png, image/jpeg"
               onChange={(e) => {

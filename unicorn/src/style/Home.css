@@ -15,6 +15,7 @@
 .title-header{
   color: #a9609e;
   animation: float 5s ease 2s infinite ;
+  padding-bottom: 15px;
 }
 
 .grief-intro{
@@ -51,7 +52,7 @@
   height: 70vh;
   border-radius: 10px;
   border: 1px solid white;
-  margin: 0 0 5vh 0;
+  margin: 5vh 0 5vh 15vh;
 }
 .grief {
   background-color: rgb(29, 42, 58);

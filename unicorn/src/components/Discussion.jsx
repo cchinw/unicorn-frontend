@@ -1,10 +1,9 @@
-import { API_BASE_URL } from "../constants/apiConstants"
-import axios from "axios"
+import { API_BASE_URL } from '../constants/apiConstants'
+import axios from 'axios'
 import LeaveComment from './LeaveComment'
-import { useState } from "react"
+import { useState } from 'react'
 
 const Discussion = (props) => {
-
   const [image, setImage] = useState(null)
   const [formValues, setFormValues] = useState({
     topic: '',
@@ -20,7 +19,7 @@ const Discussion = (props) => {
     e.preventDefault({
       topic: formValues.topic,
       content: formValues.content,
-      image: image,
+      image: image
     })
     console.log('HANDLE SUBMIT WORKS!')
 
@@ -55,21 +54,35 @@ const Discussion = (props) => {
   }
 
   return (
-    <div className='msgContainer'>
-      <form className='msgForm' onSubmit={handleSubmit} >
-        <input className='messageText' type='text' name='title' placeholder='What would you like to share today...' onChange={handleChange} value={formValues.title}></input>
-        <textarea className='messageText' type='text' name='content' rows='10' placeholder='What would you like to share today...' onChange={handleChange} value={formValues.content}></textarea>
-        <div className='btn'>
-          <button className='addMessageBtn'>Send</button>
+    <div className="msgContainer">
+      <form className="msgForm" onSubmit={handleSubmit}>
+        <input
+          className="messageText"
+          type="text"
+          name="title"
+          placeholder="What would you like to share today..."
+          onChange={handleChange}
+          value={formValues.title}
+        ></input>
+        <textarea
+          className="messageText"
+          type="text"
+          name="content"
+          rows="10"
+          placeholder="What would you like to share today..."
+          onChange={handleChange}
+          value={formValues.content}
+        ></textarea>
+        <div className="btn">
+          <button className="addMessageBtn">Send</button>
           <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={(e) => {
-            setImage(e.target.files[0])
-          }}
-        />
+            type="file"
+            onChange={(e) => {
+              setImage(e.target.files[0])
+            }}
+          />
         </div>
-      </form >
+      </form>
     </div>
   )
 }
