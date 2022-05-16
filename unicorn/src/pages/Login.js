@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../constants/apiConstants'
 import axios from 'axios'
 
-const Login = ({ setUnicornUser, toggleAuthenticated }) => {
+const Login = ({ setUnicornUser, toggleAuthenticated, token }) => {
   let navigate = useNavigate()
   const [formValues, setFormValues] = useState({ email: '', password: '' })
 
@@ -16,26 +16,27 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
       email: formValues.email,
       password: formValues.password
     })
-    // let formData = new FormData()
-    // formData.append('email', formValues.email || '')
-    // formData.append('password', formValues.password || '')
 
-    axios({
+    await axios({
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
+        // Authorization: `Token ${token}`
       },
       method: 'post',
-      url: API_BASE_URL + '/rest-auth/accounts/login/',
+      url: API_BASE_URL + '/rest-auth/login/',
       withCredentials: true,
       data: formValues
     })
       .then((response) => {
+        console.log(response, 'BEFORE')
         if (response.status === 200) {
-          navigate('/communities')
+          console.log(response.data, 'LOGIN WORKS')
+          navigate('/feed')
         }
       })
       .catch((error) => {
+        console.log(error, 'AFTER')
         if (error.response) {
           //Get popup library for alerts
           console.log('Error', error.message)
@@ -48,7 +49,7 @@ const Login = ({ setUnicornUser, toggleAuthenticated }) => {
       <h1>Login!</h1>
       <div className="login-forms">
         <div className="input-wrapper">
-          <label htmlFor="username">Email </label>
+          <label htmlFor="email">Email </label>
           <input
             onChange={handleChange}
             name="email"

@@ -7,6 +7,7 @@ import './style/Home.css'
 import './style/GriefStagePage.css'
 import './style/SignUp.css'
 import './style/Button.css'
+import './style/Feed.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import About from './pages/About'
@@ -19,19 +20,21 @@ import CommunityPage from './pages/CommunityPage'
 import DiscussionPage from './pages/DiscussionPage'
 import GriefStagePage from './pages/GriefStagePage'
 import ResourcePage from './pages/ResourcePage'
+import Feed from './pages/Feed'
 import VerifyEmail from './pages/VerifyEmail'
 import Modal from './components/Modal'
 import Nav from './components/Nav'
 import Profile from './components/Profile'
 import Community from './components/Community'
+import Client from './services/api'
 import { API_BASE_URL } from './constants/apiConstants'
 import axios from 'axios'
 
 function App() {
-  const token = process.env.TOKEN
+  let token = '5d1ff085cc94337ebc0053dfcffd8220acd3c12c'
   // User State
   const [authenticated, toggleAuthenticated] = useState(false)
-  const [unicornUser, setUnicornUser] = useState(null)
+  const [unicornUser, setUnicornUser] = useState('')
   const [unicornUsers, setUnicornUsers] = useState([])
   const [nonUserUnicorn, setNonUserUnicorn] = useState({
     username: '',
@@ -55,12 +58,13 @@ function App() {
   const [community, setCommunity] = useState('')
   const [clicked, toggleClicked] = useState(false)
   const [clickedComment, toggleClickedComment] = useState(false)
+  const [clickedDiscussion, toggleClickedDiscussion] = useState(false)
   const [deleted, toggleDeleted] = useState(false)
   const [userImages, setUserImages] = useState([])
   const [editingName, toggleEditingName] = useState(false)
   const [newName, setNewName] = useState('')
   const [editingImage, toggleEditingImage] = useState(false)
-  const [newImage, setNewImage] = useState('')
+  const [newImage, setNewImage] = useState(null)
   const [creator, setCreator] = useState({})
   const [editingColors, toggleEditingColors] = useState(false)
   const [newPrimaryColor, setNewPrimaryColor] = useState('')
@@ -70,8 +74,11 @@ function App() {
   const [reloads, setReloads] = useState(0)
 
   // Discussion Page State
-  const [discussion, setDiscussion] = useState([])
+  const [discussion, setDiscussion] = useState('')
+  const [discussions, setDiscussions] = useState([])
   const [comments, setComments] = useState([])
+  const [comment, setComment] = useState(null)
+  const [viewComments, toggleViewComments] = useState(false)
   const [upvote, setUpvote] = useState(null)
 
   // Modal State
@@ -178,6 +185,7 @@ function App() {
                 setHeader={setHeader}
                 popupMessage={popupMessage}
                 setPopupMessage={setPopupMessage}
+                token={token}
               />
             }
           />
@@ -242,7 +250,7 @@ function App() {
             }
           />
           <Route
-            path="/communities"
+            path="/community/"
             element={
               <CommunityPage
                 community={community}
@@ -257,8 +265,12 @@ function App() {
                 setGriefStage={setGriefStage}
                 discussion={discussion}
                 setDiscussion={setDiscussion}
+                discussions={discussions}
+                setDiscussions={setDiscussions}
                 comments={comments}
                 setComments={setComments}
+                comment={comment}
+                setComment={setComment}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
                 header={header}
@@ -271,6 +283,8 @@ function App() {
                 toggleClicked={toggleClicked}
                 clickedComment={clickedComment}
                 toggleClickedComment={toggleClickedComment}
+                clickedDiscussion={clickedDiscussion}
+                toggleClickedDiscussion={toggleClickedDiscussion}
                 deleted={deleted}
                 toggleDeleted={toggleDeleted}
                 userImages={userImages}
@@ -298,6 +312,8 @@ function App() {
                 reloads={reloads}
                 setReloads={setReloads}
                 token={token}
+                viewComments={viewComments}
+                toggleViewComments={toggleViewComments}
               />
             }
           />
@@ -372,6 +388,36 @@ function App() {
                 nonUserUnicorn={nonUserUnicorn}
                 setNonUserUnicorn={setNonUserUnicorn}
                 token={token}
+              />
+            }
+          />
+          <Route
+            path="/feed/:id"
+            element={
+              <Feed
+                community={community}
+                setCommunity={setCommunity}
+                communities={communities}
+                setCommunities={setCommunities}
+                unicornUser={unicornUser}
+                setUnicornUser={setUnicornUser}
+                unicornUsers={unicornUsers}
+                setUnicornUsers={setUnicornUsers}
+                discussion={discussion}
+                setDiscussion={setDiscussion}
+                discussions={discussions}
+                setDiscussions={setDiscussions}
+                comments={comments}
+                setComments={setComments}
+                comment={comment}
+                setComment={setComment}
+                creator={creator}
+                setCreator={setCreator}
+                token={token}
+                viewComments={viewComments}
+                toggleViewComments={toggleViewComments}
+                newImage={newImage}
+                setNewImage={setNewImage}
               />
             }
           />

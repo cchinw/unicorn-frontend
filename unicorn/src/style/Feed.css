@@ -1,0 +1,69 @@
+.faqheader {
+  text-align: center;
+  margin: 0 0 30px 0;
+}
+
+.guestMessage {
+  margin-bottom: 20%;
+  padding: 50px;
+}
+
+.postMessage {
+  display: flex;
+  margin-top: 80px;
+  margin-left: 50px;
+  box-shadow: 2px 2px 4px 2px grey;
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  width: 90%;
+}
+
+.msgForm {
+  margin-top: 40px;
+  padding-left: 40px;
+  background: white;
+  border-radius: 30px;
+  padding: 70px 50px 70px 50px;
+  box-shadow: 12px 12px 22px grey;
+  display: block;
+}
+
+.uploadImage {
+  width: 100%;
+  display: block;
+  margin-bottom: 30px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.messageText {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.postMessage {
+  display: flex;
+  margin-top: 80px;
+  margin-left: 50px;
+  box-shadow: 2px 2px 4px 2px grey;
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  width: 90%;
+}
+
+.updateDeleteDiv {
+  margin-top: 30px;
+  padding: 50px;
+}
+
+.updateMsgContainer {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.msgImage {
+  width: 500px;
+  height: 500px;
+}

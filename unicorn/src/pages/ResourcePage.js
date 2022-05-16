@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
-const ResourcePage = ({ resources, setResources }) => {
+const ResourcePage = ({ resources, setResources, token }) => {
   let navigate = useNavigate()
 
   // const api_url = API_BASE_URL
@@ -15,7 +15,8 @@ const ResourcePage = ({ resources, setResources }) => {
     axios({
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        Authorization: `Token ${token}`
       },
       method: 'GET',
       url: API_BASE_URL + '/unicorn/api/list/resources',
@@ -23,9 +24,7 @@ const ResourcePage = ({ resources, setResources }) => {
     })
       .then((response) => {
         const data = response.data
-        console.log(data, 'RESPONSE')
-        setResources(data)
-        console.log(resources, 'LIST RESOURCES')
+        setResources(data.results)
       })
       .catch((error) => {
         if (error.response) {
@@ -39,21 +38,22 @@ const ResourcePage = ({ resources, setResources }) => {
   }, [])
 
   return (
-    <div className="resources">
+    <div className="grief-stage">
       <h1>Resources</h1>
       {resources.map((resource, index) => (
-        <div className="carousel">
-          key={resource.id}
-          <div className="child">
+        <div className="grief-stage-container" key={resource.id}>
+          <div className="grief-stage-card">
             <img
-              className="resource-image"
+              className="grief-image"
               src={resource.image}
               alt={resource.title}
               onClick={() => {
                 navigate(resource.resource)
               }}
             />
-            <a href={resource.resource}>{resource.title}</a>
+            <a className="grief-stage-title" href={resource.resource}>
+              {resource.title}
+            </a>
           </div>
         </div>
       ))}

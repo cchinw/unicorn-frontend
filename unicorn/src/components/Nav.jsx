@@ -87,19 +87,54 @@ const Nav = ({authenticated, unicornUser, handleLogout}) => {
   }
 
   const publicOptions = (
-    <nav className="publicOption nav-body">
-      <Link to="/landing-page">Home</Link>
-      <Link to="/about">About Unicorn</Link>
-      <Link to="/resources">Resources</Link>
-      <Link to="/register">Register</Link>
-      <Link to="/login">Sign In</Link>
-    </nav>
+
+    <nav className="navbar-text nav-body">
+    <div className="welcome" > 
+      <h1 className="username">
+      Welcome {unicornUser.username}!
+      </h1>
+
+      <ul className="icon icon-container">
+      <input type='checkbox' id="hamburger_icon" />
+      <label htmlFor='hamburger_icon' className="hamburger">&#9776;</label>
+      <div className="nav-menu" >
+        <div className="icon icon-fill">
+            <li className="i fa fa-home"><Link to='/home'>Home</Link></li>
+          </div>
+
+          <div className="icon icon-fill">
+           <li className="i fa fa-home"><Link to='/about'>About Unicorn</Link></li>
+         </div>
+
+         <div className="icon icon-enter">
+           <li className="fa fa-user"><Link to="/resources">Resources</Link></li>
+         </div>
+
+         <div className="icon icon-enter">
+           <li className="fa fa-user"><Link to="/register">Register</Link></li>
+         </div>
+
+         <div className="icon icon-enter">
+           <li className="fa fa-user"><Link to="/login">Sign In</Link></li>
+         </div>
+
+          <div className="icon icon-collapse">
+            <li className="i fa fa-sign-in"><Link onClick={handleLogout} to='/'>Sign Out</Link></li>
+          </div>
+        
+      </div>
+    </ul>
+
+      
+    </div>
+    
+  </nav>
   )
 
   return (
     <header className="navbar container" >
       <div className="nav-left content">
-      <Link to='/' >
+      <Link to='/feed/:id' >
         <div className="logo-container" alt='logo' >
           <img className="logo" src={Logo} alt="unicornUser-logo" />
         </div>

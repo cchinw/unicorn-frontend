@@ -1,6 +1,6 @@
 import {useNavigate, Link} from 'react-router-dom'
 
-const GriefStage = ({griefStage, title, description, image, unicornUser, setUnicornUser, errorMessage, setErrorMessage, openModal, setOpenModal, header, setHeader }) => {
+const GriefStage = ({griefStage, token, title, description, image, unicornUser, setUnicornUser, errorMessage, setErrorMessage, openModal, setOpenModal, header, setHeader }) => {
   
   let navigate = useNavigate()
 

@@ -19,6 +19,7 @@ const Home = ({
   setErrorMessage,
   token
 }) => {
+  // let token = 'c8f9b81d5c9a1fefe6772260e3e75545ba57a921'
   let navigate = useNavigate()
 
   // const getGriefStages = async () => {
@@ -39,16 +40,16 @@ const Home = ({
       withCredentials: true
     })
       .then((response) => {
-        // console.log(response, 'RESPONSE!!!!!!')
+        console.log(response, 'RESPONSE!!!!!!')
         const data = response.data.results
-        // console.log(data, 'RESPONSE')
+        console.log(data, 'RESPONSE')
         setGriefStages(data)
-        // console.log(griefStages, 'GET GRIEF STAGES')
+        console.log(griefStages, 'GET GRIEF STAGES')
       })
       .catch((error) => {
         if (error.response) {
           //Get popup library for alerts
-          // console.log('Error', error.message)
+          console.log('Error', error.message)
         }
       })
   }

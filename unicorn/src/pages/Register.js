@@ -7,14 +7,6 @@ import { useNavigate } from 'react-router-dom'
 const Register = ({ setOpenModal, setHeader, setPopupMessage }) => {
   let navigate = useNavigate()
 
-  // const toBase64 = (file) =>
-  //   new Promise((resolve, reject) => {
-  //     const reader = new FileReader()
-  //     reader.readAsDataURL(file)
-  //     reader.onload = () => resolve(reader.result)
-  //     reader.onerror = (error) => reject(error)
-  //   })
-
   const [formValues, setFormValues] = useState({
     username: '',
     bio: '',
@@ -27,9 +19,6 @@ const Register = ({ setOpenModal, setHeader, setPopupMessage }) => {
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
-  // const handleAvatar = (e) => {
-  //   setAvatar({avatar: e.target.files[0]})
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault({
